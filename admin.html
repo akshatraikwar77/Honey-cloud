@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Cloud Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-container">
+        <h1>⚙️ Admin Management</h1>
+        <p>Manage Honey Cloud usage, credits, and users.</p>
+        
+        <div class="admin-stats">
+            <div class="stat-card">
+                <h3>Total Active Users</h3>
+                <p>1 (Local)</p>
+            </div>
+            <div class="stat-card">
+                <h3>Current Local Credits</h3>
+                <p id="admin-credit-count">20</p>
+            </div>
+        </div>
+
+        <div class="admin-panel">
+            <h3>User Management (Local)</h3>
+            <div class="user-row">
+                <span><strong>Local User</strong> (You)</span>
+                <button class="btn-admin" onclick="resetUserCredits()">Reset to 20 Credits</button>
+            </div>
+            <div class="user-row">
+                <span>Set Custom Daily Limit:</span>
+                <input type="number" id="limit-input" value="10" class="admin-input">
+                <button class="btn-admin" onclick="setCustomLimit()">Update Limit</button>
+            </div>
+            <div class="admin-note">
+                * Phase 1: All data is saved locally in your browser. 
+                Phase 2 will include a real database and Google login.
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-link">← Back to Honey Cloud</a>
+    </div>
+
+    <script src="credits.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
