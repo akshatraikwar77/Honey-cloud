@@ -8,23 +8,51 @@
 .badge { position: absolute; top: 12px; right: 12px; background: rgba(99, 102, 241, 0.2); color: #8b5cf6; font-size: 0.7rem; padding: 4px 8px; border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.3); }
 .card.featured { border-color: var(--primary); box-shadow: 0 0 30px rgba(99, 102, 241, 0.2); }
 
-/* Generator */
-.generator { background: var(--bg-glass); backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px; max-width: 900px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-.gen-tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 16px; flex-wrap: wrap; }
+/* Generator - FIXED FOR MOBILE */
+.generator { background: var(--bg-glass); backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; max-width: 900px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.gen-tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 16px; flex-wrap: wrap; justify-content: center; }
 .gen-tab { background: transparent; border: none; color: var(--text-muted); padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
 .gen-tab:hover, .gen-tab.active { background: var(--bg-card); color: white; }
-.gen-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-bottom: 20px; }
-.gen-options select { width: 100%; background: var(--bg); border: 1px solid var(--border); color: white; padding: 12px; border-radius: var(--radius); outline: none; }
-.prompt-area { display: flex; gap: 12px; margin-top: 20px; }
-.prompt-area textarea { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; color: white; resize: vertical; min-height: 80px; outline: none; font-family: inherit; }
-.btn-generate { background: white; color: black; border: none; padding: 0 32px; border-radius: var(--radius); font-weight: 700; cursor: pointer; transition: 0.3s; }
+
+/* MOBILE FIX: Force these to stack properly */
+.gen-options { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* 2 columns on mobile */
+    gap: 12px; 
+    margin-bottom: 20px; 
+}
+.gen-options select { 
+    width: 100%; background: var(--bg); border: 1px solid var(--border); 
+    color: white; padding: 12px; border-radius: var(--radius); outline: none; 
+    font-size: 0.9rem; /* Prevent zoom on mobile */
+}
+
+/* MOBILE FIX: Make input and button stack on top of each other */
+.prompt-area { 
+    display: flex; 
+    flex-direction: column; /* Stack vertically */
+    gap: 16px; 
+    margin-top: 10px; 
+}
+.prompt-area textarea { 
+    width: 100%; background: var(--bg); border: 1px solid var(--border); 
+    border-radius: var(--radius); padding: 16px; color: white; 
+    resize: vertical; min-height: 100px; outline: none; font-family: inherit; 
+    font-size: 1rem;
+}
+.btn-generate { 
+    background: white; color: black; border: none; 
+    padding: 16px; /* Taller, easier to tap on mobile */
+    border-radius: var(--radius); font-weight: 700; cursor: pointer; 
+    transition: 0.3s; width: 100%; font-size: 1rem;
+}
 .btn-generate:hover { transform: scale(1.02); }
 
-/* Output */
+/* Output Fixes for mobile */
 #output-container { margin-top: 30px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; min-height: 100px; display: none; flex-direction: column; }
-#output-content { flex: 1; white-space: pre-wrap; color: var(--text-muted); margin-bottom: 16px; }
-.output-actions { display: flex; gap: 12px; justify-content: flex-end; border-top: 1px solid var(--border); padding-top: 16px; }
-.output-actions button { background: transparent; border: 1px solid var(--border); color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+#output-content { flex: 1; white-space: pre-wrap; color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem; line-height: 1.5; }
+.output-actions { display: flex; gap: 12px; justify-content: flex-end; border-top: 1px solid var(--border); padding-top: 16px; flex-wrap: wrap; }
+.output-actions button { background: transparent; border: 1px solid var(--border); color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-size: 0.85rem; }
 .output-actions button:hover { background: var(--bg-card); }
 
 /* Pricing */
@@ -35,3 +63,11 @@
 .price-card ul { list-style: none; text-align: left; color: var(--text-muted); margin: 20px 0; font-size: 0.9rem; }
 .price-card ul li { padding: 6px 0; display: flex; align-items: center; gap: 8px; }
 .price-card ul li::before { content: "✓"; color: var(--primary); font-weight: bold; }
+
+/* Override for Desktop screens (1024px and up) */
+@media (min-width: 1024px) {
+    .prompt-area { flex-direction: row; } /* Put them side-by-side on large screens */
+    .prompt-area textarea { min-height: 80px; }
+    .btn-generate { width: auto; padding: 0 32px; }
+    .gen-options { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  }
