@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Honey Cloud - AI Platform</title>
+    <title>Honey Cloud - Ultimate AI Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
     <!-- ===== NAVBAR ===== -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">
+            <a href="#" class="logo">
                 <span class="logo-icon">🍯</span>
                 <span class="logo-text">HONEY<span class="highlight">CLOUD</span></span>
-            </div>
+            </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#ai-models">AI Models</a></li>
                 <li><a href="#generator">Generator</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
             </ul>
             <div class="nav-actions">
-                <button class="btn-nav btn-nav-outline">Sign In</button>
-                <button class="btn-nav btn-nav-primary">Get Started</button>
+                <button class="btn-nav btn-nav-outline" onclick="openAuth('signin')">Sign In</button>
+                <button class="btn-nav btn-nav-primary" onclick="openAuth('signup')">Get Started</button>
                 <button class="hamburger" onclick="toggleMenu()">☰</button>
             </div>
         </div>
@@ -33,27 +35,40 @@
     <!-- ===== HERO ===== -->
     <section class="hero" id="home">
         <div class="hero-bg"></div>
+        <div class="hero-particles" id="heroParticles"></div>
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">🚀 NEXT-GEN AI PLATFORM</div>
-                <h1>AI for <span class="gradient-text">Photos, Videos, Websites</span> &amp; Every Task</h1>
-                <p>Generate stunning images, professional videos, complete websites, and automate tasks — all with one powerful AI platform. Start with 20 free credits.</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary">Start Creating →</button>
-                    <button class="btn-secondary">Watch Demo</button>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">🚀 NEXT-GEN AI PLATFORM</div>
+                    <h1>AI for <span class="gradient-text">Photos, Videos, Websites</span> &amp; Every Task</h1>
+                    <p>Generate stunning images, professional videos, complete websites, and automate tasks — all with one powerful AI platform. Start with 20 free credits.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Start Creating →</button>
+                        <button class="btn-secondary" onclick="playDemo()">▶ Watch Demo</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat"><span class="stat-number">50K+</span><span class="stat-label">Users</span></div>
+                        <div class="stat"><span class="stat-number">1M+</span><span class="stat-label">Generations</span></div>
+                        <div class="stat"><span class="stat-number">99.9%</span><span class="stat-label">Uptime</span></div>
+                    </div>
+                    <div class="credits-display">
+                        <span class="credits-icon">🍯</span>
+                        <span class="credits-label">Your Credits</span>
+                        <span class="credits-amount" id="creditBalance">20</span>
+                        <span class="credits-free">FREE</span>
+                        <button class="credits-add" onclick="addCredits()">+ Add</button>
+                    </div>
                 </div>
-                <div class="credits-display">
-                    <span class="credits-icon">🍯</span>
-                    <span class="credits-label">Your Credits</span>
-                    <span class="credits-amount" id="creditBalance">20</span>
-                    <span class="credits-free">FREE</span>
+                <div class="hero-visual">
+                    <div class="floating-cube"></div>
+                    <div class="floating-cube-2"></div>
+                    <div class="floating-cube-3"></div>
+                    <div class="glow-ring"></div>
+                    <div class="hero-ai-badge">
+                        <span>🤖</span>
+                        <span>AI Powered</span>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-cube"></div>
-                <div class="floating-cube-2"></div>
-                <div class="floating-cube-3"></div>
-                <div class="glow-ring"></div>
             </div>
         </div>
     </section>
@@ -64,40 +79,88 @@
             <div class="section-header">
                 <span class="section-tag">✨ FEATURES</span>
                 <h2 class="section-title">What Can <span class="gradient-text">Honey Cloud</span> Do?</h2>
-                <p class="section-subtitle">One platform. Four powerful AI tools. Unlimited possibilities.</p>
+                <p class="section-subtitle">One platform. 10+ powerful AI tools. Unlimited possibilities.</p>
             </div>
 
             <div class="features-grid">
                 <div class="feature-card" onclick="selectFeature('photo')">
                     <div class="feature-icon">🖼️</div>
                     <div class="feature-badge">AI Image</div>
-                    <h3>AI Photo</h3>
-                    <p>Generate stunning images from text descriptions. Create art, logos, and more.</p>
-                    <button class="btn-feature">Generate Photo →</button>
+                    <h3>AI Photo Generator</h3>
+                    <p>Generate stunning images, art, logos, and designs from text descriptions.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('photo')">Try Now →</button>
                 </div>
 
                 <div class="feature-card" onclick="selectFeature('video')">
                     <div class="feature-icon">🎬</div>
                     <div class="feature-badge">AI Video</div>
-                    <h3>AI Video</h3>
-                    <p>Create professional videos from simple prompts. Perfect for content creators.</p>
-                    <button class="btn-feature">Generate Video →</button>
+                    <h3>AI Video Creator</h3>
+                    <p>Create professional videos, animations, and short clips from simple prompts.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('video')">Try Now →</button>
                 </div>
 
                 <div class="feature-card" onclick="selectFeature('website')">
                     <div class="feature-icon">🌐</div>
                     <div class="feature-badge">AI Website</div>
-                    <h3>AI Website</h3>
-                    <p>Build complete websites with AI — no coding required. Just describe your idea.</p>
-                    <button class="btn-feature">Generate Website →</button>
+                    <h3>AI Website Builder</h3>
+                    <p>Build complete, responsive websites with AI — no coding required.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('website')">Try Now →</button>
                 </div>
 
-                <div class="feature-card" onclick="selectFeature('tasks')">
-                    <div class="feature-icon">⚡</div>
-                    <div class="feature-badge">AI Tasks</div>
-                    <h3>Simple Tasks</h3>
-                    <p>Automate everyday tasks — write emails, summaries, code, translations &amp; more.</p>
-                    <button class="btn-feature">Start Task →</button>
+                <div class="feature-card" onclick="selectFeature('code')">
+                    <div class="feature-icon">💻</div>
+                    <div class="feature-badge">AI Code</div>
+                    <h3>AI Code Generator</h3>
+                    <p>Write code in any language. Fix bugs, optimize, and learn with AI.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('code')">Try Now →</button>
+                </div>
+
+                <div class="feature-card" onclick="selectFeature('write')">
+                    <div class="feature-icon">✍️</div>
+                    <div class="feature-badge">AI Writing</div>
+                    <h3>AI Content Writer</h3>
+                    <p>Generate blog posts, articles, emails, and social media content instantly.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('write')">Try Now →</button>
+                </div>
+
+                <div class="feature-card" onclick="selectFeature('translate')">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-badge">AI Translate</div>
+                    <h3>AI Translation</h3>
+                    <p>Translate text between 100+ languages with context-aware AI.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('translate')">Try Now →</button>
+                </div>
+
+                <div class="feature-card" onclick="selectFeature('chat')">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-badge">AI Chat</div>
+                    <h3>AI Chat Assistant</h3>
+                    <p>Chat with AI for answers, brainstorming, research, and problem-solving.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('chat')">Try Now →</button>
+                </div>
+
+                <div class="feature-card" onclick="selectFeature('audio')">
+                    <div class="feature-icon">🎵</div>
+                    <div class="feature-badge">AI Audio</div>
+                    <h3>AI Audio Generator</h3>
+                    <p>Create music, voiceovers, and sound effects with AI.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('audio')">Try Now →</button>
+                </div>
+
+                <div class="feature-card" onclick="selectFeature('design')">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-badge">AI Design</div>
+                    <h3>AI Design Studio</h3>
+                    <p>Generate UI/UX designs, wireframes, and mockups instantly.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('design')">Try Now →</button>
+                </div>
+
+                <div class="feature-card" onclick="selectFeature('seo')">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-badge">AI SEO</div>
+                    <h3>AI SEO Optimizer</h3>
+                    <p>Optimize content for search engines with AI-powered suggestions.</p>
+                    <button class="btn-feature" onclick="event.stopPropagation();selectFeature('seo')">Try Now →</button>
                 </div>
             </div>
         </div>
@@ -113,29 +176,47 @@
             </div>
 
             <div class="ai-grid">
-                <div class="ai-card">
+                <div class="ai-card" onclick="selectModel('claude')">
                     <div class="ai-icon">🤖</div>
-                    <span class="ai-tag">⚡ Fast</span>
+                    <span class="ai-tag">⚡ Fast & Smart</span>
                     <h4>Claude AI</h4>
-                    <p>Best for complex reasoning, coding, and detailed content.</p>
+                    <p>Best for complex reasoning, coding, and detailed content creation.</p>
+                    <div class="ai-badge">200K Context</div>
                 </div>
-                <div class="ai-card">
+                <div class="ai-card" onclick="selectModel('chatgpt')">
                     <div class="ai-icon">💬</div>
                     <span class="ai-tag">🌟 Creative</span>
                     <h4>ChatGPT</h4>
                     <p>Great for conversational tasks, copywriting, and creative content.</p>
+                    <div class="ai-badge">GPT-4 Level</div>
                 </div>
-                <div class="ai-card honey-card">
+                <div class="ai-card honey-card" onclick="selectModel('honey')">
                     <div class="ai-icon">🍯</div>
-                    <span class="ai-tag honey-tag">🔥 Honey 1.0</span>
+                    <span class="ai-tag honey-tag">🔥 Exclusive</span>
                     <h4>Honey 1.0</h4>
-                    <p>Custom-built for Honey Cloud — optimized for speed and quality.</p>
+                    <p>Custom-built for Honey Cloud — optimized for speed, quality, and all tasks.</p>
+                    <div class="ai-badge" style="background:rgba(99,102,241,0.1);color:#818CF8;">Our Best</div>
                 </div>
-                <div class="ai-card">
+                <div class="ai-card" onclick="selectModel('dalle')">
                     <div class="ai-icon">🎨</div>
                     <span class="ai-tag">🖼️ Visual</span>
-                    <h4>DALL-E / SD</h4>
-                    <p>Specialized for generating images, art, and visual content.</p>
+                    <h4>DALL-E 3</h4>
+                    <p>Specialized for generating images, art, and visual content from prompts.</p>
+                    <div class="ai-badge">HD Quality</div>
+                </div>
+                <div class="ai-card" onclick="selectModel('midjourney')">
+                    <div class="ai-icon">🎭</div>
+                    <span class="ai-tag">🎨 Artistic</span>
+                    <h4>Midjourney</h4>
+                    <p>Professional-grade image generation with artistic styles and high detail.</p>
+                    <div class="ai-badge">V6</div>
+                </div>
+                <div class="ai-card" onclick="selectModel('gemini')">
+                    <div class="ai-icon">⭐</div>
+                    <span class="ai-tag">🚀 Advanced</span>
+                    <h4>Google Gemini</h4>
+                    <p>Multi-modal AI with image, text, video, and audio understanding.</p>
+                    <div class="ai-badge">Pro</div>
                 </div>
             </div>
         </div>
@@ -151,21 +232,32 @@
             </div>
 
             <div class="generator-box">
+                <!-- Tabs -->
                 <div class="generator-tabs">
                     <button class="gen-tab active" data-task="photo" onclick="switchTab('photo')">🖼️ Photo</button>
                     <button class="gen-tab" data-task="video" onclick="switchTab('video')">🎬 Video</button>
                     <button class="gen-tab" data-task="website" onclick="switchTab('website')">🌐 Website</button>
-                    <button class="gen-tab" data-task="task" onclick="switchTab('task')">⚡ Task</button>
+                    <button class="gen-tab" data-task="code" onclick="switchTab('code')">💻 Code</button>
+                    <button class="gen-tab" data-task="write" onclick="switchTab('write')">✍️ Write</button>
+                    <button class="gen-tab" data-task="translate" onclick="switchTab('translate')">🌍 Translate</button>
+                    <button class="gen-tab" data-task="chat" onclick="switchTab('chat')">💬 Chat</button>
+                    <button class="gen-tab" data-task="audio" onclick="switchTab('audio')">🎵 Audio</button>
+                    <button class="gen-tab" data-task="design" onclick="switchTab('design')">🎨 Design</button>
+                    <button class="gen-tab" data-task="seo" onclick="switchTab('seo')">📈 SEO</button>
                 </div>
 
+                <!-- Input -->
                 <textarea id="promptInput" placeholder="Describe what you want to generate..."></textarea>
 
+                <!-- Options -->
                 <div class="generator-options">
                     <select id="modelSelect">
                         <option value="claude">🤖 Claude AI</option>
                         <option value="chatgpt">💬 ChatGPT</option>
                         <option value="honey">🍯 Honey 1.0</option>
-                        <option value="dalle">🎨 DALL-E</option>
+                        <option value="dalle">🎨 DALL-E 3</option>
+                        <option value="midjourney">🎭 Midjourney</option>
+                        <option value="gemini">⭐ Google Gemini</option>
                     </select>
                     <select id="styleSelect">
                         <option value="modern">Modern</option>
@@ -173,56 +265,104 @@
                         <option value="dark">Dark</option>
                         <option value="vibrant">Vibrant</option>
                         <option value="professional">Professional</option>
+                        <option value="creative">Creative</option>
+                        <option value="casual">Casual</option>
+                    </select>
+                    <select id="lengthSelect">
+                        <option value="short">Short</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="long">Long</option>
+                        <option value="detailed">Detailed</option>
+                    </select>
+                    <select id="toneSelect">
+                        <option value="professional">Professional</option>
+                        <option value="casual">Casual</option>
+                        <option value="friendly">Friendly</option>
+                        <option value="formal">Formal</option>
+                        <option value="humorous">Humorous</option>
+                        <option value="inspirational">Inspirational</option>
                     </select>
                 </div>
 
+                <!-- Generate Button -->
                 <button class="btn-generate" onclick="generateContent()">🚀 Generate Now</button>
 
+                <!-- Output -->
                 <div class="generator-output" id="output">
-                    ✨ Your generated content will appear here...
+                    <div class="output-placeholder">
+                        <span class="output-icon">✨</span>
+                        <p>Your generated content will appear here</p>
+                        <span class="output-sub">Select a task, write a prompt, and click generate</span>
+                    </div>
+                </div>
+
+                <!-- History -->
+                <div class="generator-history">
+                    <h4>📜 Recent Generations</h4>
+                    <div class="history-list" id="historyList">
+                        <div class="history-item">
+                            <span>🌐 Modern portfolio website</span>
+                            <span class="history-time">2 min ago</span>
+                        </div>
+                        <div class="history-item">
+                            <span>🖼️ Cyberpunk cityscape</span>
+                            <span class="history-time">15 min ago</span>
+                        </div>
+                        <div class="history-item">
+                            <span>💻 Python data analysis script</span>
+                            <span class="history-time">1 hour ago</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
+    <!-- ===== PRICING ===== -->
+    <section class="section section-alt" id="pricing">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="logo" style="justify-content:flex-start;">
-                        <span class="logo-icon">🍯</span>
-                        <span class="logo-text">HONEY<span class="highlight">CLOUD</span></span>
-                    </div>
-                    <p>AI for Photos • Videos • Websites • Tasks</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-col">
-                        <h4>Product</h4>
-                        <a href="#">Features</a>
-                        <a href="#">Pricing</a>
-                        <a href="#">API</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Company</h4>
-                        <a href="#">About</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Contact</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Support</h4>
-                        <a href="#">Help Center</a>
-                        <a href="#">Privacy</a>
-                        <a href="#">Terms</a>
-                    </div>
-                </div>
+            <div class="section-header">
+                <span class="section-tag">💎 PRICING</span>
+                <h2 class="section-title">Simple, <span class="gradient-text">Transparent</span> Pricing</h2>
+                <p class="section-subtitle">Choose the plan that fits your needs. All plans include access to all AI models.</p>
             </div>
-            <div class="footer-bottom">
-                <p>Created by <span class="highlight">Akshat</span> &amp; <span class="highlight">Huzaifa</span> ❤️</p>
-            </div>
-        </div>
-    </footer>
 
-    <script src="script.js"></script>
-</body>
-    </html>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-badge">Free</div>
+                    <div class="pricing-icon">🍯</div>
+                    <h3>Starter</h3>
+                    <div class="pricing-price">₹0 <span>/ month</span></div>
+                    <ul class="pricing-features">
+                        <li>✅ 20 Free Credits</li>
+                        <li>✅ All AI Models</li>
+                        <li>✅ 10 Tasks per Day</li>
+                        <li>✅ Basic Support</li>
+                        <li>❌ Premium Models</li>
+                        <li>❌ Priority Queue</li>
+                    </ul>
+                    <button class="btn-pricing" onclick="openAuth('signup')">Get Started</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">🔥 Most Popular</div>
+                    <div class="pricing-icon">⚡</div>
+                    <h3>Pro</h3>
+                    <div class="pricing-price">₹999 <span>/ month</span></div>
+                    <ul class="pricing-features">
+                        <li>✅ 500 Credits / Month</li>
+                        <li>✅ All AI Models</li>
+                        <li>✅ Unlimited Tasks</li>
+                        <li>✅ Priority Support</li>
+                        <li>✅ Premium Models</li>
+                        <li>✅ Priority Queue</li>
+                        <li>✅ API Access</li>
+                    </ul>
+                    <button class="btn-pricing btn-pricing-primary" onclick="openAuth('signup')">Start Pro →</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-badge">👑 Enterprise</div>
+                    <div class="pricing-icon">🚀</div>
+                    <h3>Business</h3>
+                    <div class="pricing-price">₹2,499 <span>/ month</s
